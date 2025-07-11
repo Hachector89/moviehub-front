@@ -1,12 +1,1 @@
-<mat-sidenav-container class="h-screen">
-  <mat-sidenav #drawer class="w-64 bg-gray-900 text-white" mode="over" [fixedInViewport]="true" [opened]="false">
-    <app-side-menu (close)="drawer.close()"></app-side-menu>
-  </mat-sidenav>
-
-  <mat-sidenav-content class="bg-gray-950 text-white">
-    <app-navbar (menuToggle)="drawer.toggle()"></app-navbar>
-    <main class="p-4">
-      <router-outlet />
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<router-outlet />
