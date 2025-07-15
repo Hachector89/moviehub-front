@@ -2,9 +2,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatListModule } from '@angular/material/list'
 import { RouterModule } from '@angular/router';
 
+import { LanguageSelectorComponent } from '../language-selector/language-selector-component'
+
+
 @Component({
   selector: 'app-side-menu-component',
-  imports: [MatListModule, RouterModule],
+  imports: [MatListModule, RouterModule, LanguageSelectorComponent],
   templateUrl: './side-menu-component.html',
   styleUrl: './side-menu-component.css'
 })

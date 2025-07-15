@@ -1,0 +1,26 @@
+{
+  "lang": {
+    "es": "español",
+    "en": "inglés"
+  },
+
+  "auth": {
+    "signin": "Login",
+    "signup": "Registrarse",
+    "username": "usuario",
+    "userReq": "El nombre de usuario es obligatorio.",
+    "userWarn": "El nombre de usuario sólo puede contener letras y números.",
+    "email": "email",
+    "emailReq": "El email es obligatorio.",
+    "emailWarn": "Formato de email invalido.",
+    "password": "contraseña",
+    "passReq": "La contraseña es obligatoria.",
+    "passWarn": "La contraseña debe tener al menos 8 caracteres.",
+    "confirmPassword": "confirmar contraseña",
+    "confirmPassReq": "La contraseña es obligatoria.",
+    "confirmPassWarn": "Las contraseñas deben coincidir.",
+    "dontAccount": "¿No tienes una cuenta?",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "createAccount": "Crear una."
+  }
+}

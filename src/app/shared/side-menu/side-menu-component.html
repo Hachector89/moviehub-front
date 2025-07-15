@@ -1,4 +1,9 @@
 <mat-nav-list>
+  <div class="block md:hidden px-4 pt-3 pb-6">
+    <app-language-selector-component></app-language-selector-component>
+    <mat-divider class="mt-2 mb-2"></mat-divider>
+  </div>
+
   <a mat-list-item routerLink="/" (click)="close.emit()">Home</a>
   <a mat-list-item routerLink="/seen" (click)="close.emit()">Seen</a>
   <a mat-list-item routerLink="/to-watch" (click)="close.emit()">To Watch</a>

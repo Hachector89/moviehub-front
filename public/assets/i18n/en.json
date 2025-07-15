@@ -1,0 +1,26 @@
+{
+  "lang": {
+    "es": "spanish",
+    "en": "english"
+  },
+
+  "auth": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "username": "username",
+    "userReq": "Username is required.",
+    "userWarn": "Username must contain only letters and numbers.",
+    "email": "email",
+    "emailReq": "Email is required.",
+    "emailWarn": "Enter a valid email format.",
+    "password": "password",
+    "passReq": "Password is required.",
+    "passWarn": "Password must be at least 8 characters.",
+    "confirmPassword": "confirm password",
+    "confirmPassReq": "Confirmation password is required.",
+    "confirmPassWarn": "Passwords must match.",
+    "dontAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "createAccount": "Create one"
+  }
+}

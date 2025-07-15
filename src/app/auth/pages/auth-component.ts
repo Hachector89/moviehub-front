@@ -6,6 +6,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
+import { TitleCasePipe } from '@angular/common'
+
 
 @Component({
   selector: 'app-auth-component',
@@ -18,6 +21,8 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatCardModule,
     RouterModule,
+    TranslocoModule,
+    TitleCasePipe
   ],
   templateUrl: './auth-component.html',
   styleUrl: './auth-component.css'
@@ -60,16 +65,11 @@ export class AuthComponent {
 
     const { email, password, username, confirmPassword } = this.form.value;
 
-    if (!this.isLogin() && password !== confirmPassword) {
-      alert('Passwords must match.');
-      return;
-    }
-
     if (this.isLogin()) {
-      console.log('🔐 Login:', { email, password });
+      console.log('Login:', { email, password });
       // call to authServiceLogin
     } else {
-      console.log('📝 Registro:', { username, email, password });
+      console.log('Registro:', { username, email, password });
       // call to authServiceRegister
     }
   }
