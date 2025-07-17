@@ -2,3 +2,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.custom-snackbar-error > :first-child {
+  background-color: #c72a08 !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 5px;
+  margin-top: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);;
+}

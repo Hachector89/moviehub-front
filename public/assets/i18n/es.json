@@ -21,6 +21,12 @@
     "confirmPassWarn": "Las contraseñas deben coincidir.",
     "dontAccount": "¿No tienes una cuenta?",
     "haveAccount": "¿Ya tienes una cuenta?",
-    "createAccount": "Crear una."
+    "createAccount": "Crear una.",
+    "loginFailed": "Inicio de sesión incorrecto.",
+    "registrationFailed": "Error al registrarse."
+  },
+
+  "common": {
+    "close": "Cerrar"
   }
 }

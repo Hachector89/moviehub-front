@@ -1,0 +1,12 @@
+.snackbar-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+}
+
+mat-icon {
+  font-size: 25px;
+}

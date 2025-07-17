@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  frontend:
+    build: .
+    container_name: moviehub-front
+    ports:
+      - "4200:80"
+    #volumes:
+    #  - .:/app
+    restart: always

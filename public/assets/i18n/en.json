@@ -21,6 +21,12 @@
     "confirmPassWarn": "Passwords must match.",
     "dontAccount": "Don't have an account?",
     "haveAccount": "Already have an account?",
-    "createAccount": "Create one"
+    "createAccount": "Create one",
+    "loginFailed": "Login failed.",
+    "registrationFailed": "Registration failed."
+  },
+
+  "common": {
+    "close": "Close"
   }
 }
