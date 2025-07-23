@@ -11,3 +11,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 20px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);;
 }
+
+.custom-snackbar-success > :first-child {
+  background-color: #43a047 !important;
+  color: white !important;
+  border-radius: 8px;
+  padding: 5px;
+  margin-top: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);;
+}

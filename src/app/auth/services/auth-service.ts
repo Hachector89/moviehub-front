@@ -17,12 +17,12 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  authRegister(username: string, email: string, password: string): Observable<void> {
-    return this.http.post<void>(`${this.authUrl}/register`, { username, email, password });
+  register(username: string, email: string, password: string, token: string): Observable<void> {
+    return this.http.post<void>(`${this.authUrl}/register`, { username, email, password, token });
   }
 
-  authLogin(email: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.authUrl}/login`, { email, password }).pipe(
+  login(email: string, password: string, token: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.authUrl}/login`, { email, password, token }).pipe(
       tap((res) => {
         if (res?.token) {
           localStorage.setItem('token', res.token);
@@ -31,16 +31,21 @@ export class AuthService {
     );
   }
 
-  authLogout() {
+  verifyEmailToken(token: string): Observable<any> {
+    return this.http.get(`${this.authUrl}/verify`, { params: { token } });
+  }
+
+  logout() {
     localStorage.removeItem('token');
   }
 
-  authGetToken(): string | null {
+  getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-  authIsLoggedIn(): boolean {
-    return !!this.authGetToken();
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
+
 
 }

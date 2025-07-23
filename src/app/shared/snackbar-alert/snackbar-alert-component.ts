@@ -9,5 +9,15 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './snackbar-alert-component.css'
 })
 export class SnackbarAlertComponent {
-  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { message: string, icon: string }) { }
+
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: { message: string, icon: 'success' | 'error' }) { }
+
+    get iconName(): string {
+    const iconMap = {
+      success: 'check_circle',
+      error: 'error'
+    };
+    return iconMap[this.data.icon] || 'info';
+  }
+
 }

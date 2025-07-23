@@ -40,7 +40,10 @@
         </mat-form-field>
         }
 
-        <button mat-raised-button class="mt-2" color="primary" class="w-full">
+        <re-captcha formControlName="recaptchaReactive" (resolved)="executeRecaptcha($event)"
+          siteKey="6LfpvosrAAAAABkzejPRLpMfqFbnC_pxweK6C4q7"></re-captcha>
+
+        <button mat-raised-button color="primary" class="w-full mt-6">
           {{ isLogin() ? t('auth.signin') : t('auth.signup') }}
         </button>
 
@@ -48,7 +51,7 @@
 
       <p class="text-sm mt-6 text-center">
         {{ isLogin() ? t('auth.dontAccount') : t('auth.haveAccount') }}
-        <button class="text-blue-400 underline ml-1" (click)="toggleMode()">
+        <button class="text-blue-400 underline ml-1 cursor-pointer" (click)="toggleMode()">
           {{ isLogin() ? t('auth.createAccount') : t('auth.signin') }}
         </button>
       </p>

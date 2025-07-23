@@ -22,7 +22,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth-service';
 import { EmailVerificationDialogComponent } from './email-verification-dialog/email-verification-dialog-component'
 import { SnackbarAlertComponent } from '../../shared/snackbar-alert/snackbar-alert-component';
-
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha-2';
 
 @Component({
   selector: 'app-auth-component',
@@ -37,6 +37,8 @@ import { SnackbarAlertComponent } from '../../shared/snackbar-alert/snackbar-ale
     RouterModule,
     TranslocoModule,
     TitleCasePipe,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   templateUrl: './auth-component.html',
   styleUrl: './auth-component.css'
@@ -51,7 +53,7 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -63,12 +65,21 @@ export class AuthComponent implements OnInit {
   }
 
   buildForm(): FormGroup {
-    return this.fb.group({
-      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
-    }, { validators: this.passwordsMatchValidator });
+    if (this.isLogin()) {
+      return this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        recaptchaReactive: ['', Validators.required]
+      });
+    } else {
+      return this.fb.group({
+        username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+        recaptchaReactive: ['', Validators.required]
+      }, { validators: this.passwordsMatchValidator });
+    }
   }
 
   passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
@@ -84,52 +95,53 @@ export class AuthComponent implements OnInit {
   toggleMode() {
     this.mode.update((m) => (m === 'login' ? 'register' : 'login'));
     this.form = this.buildForm();
-    this.form.reset();
+    this.form.markAsPristine();
+    this.form.markAsUntouched();
   }
 
   onSubmit() {
     if (this.form.invalid) return;
 
-    const { email, password, username } = this.form.value;
+    const { email, password, username, recaptchaReactive } = this.form.value;
 
     if (this.isLogin()) {
-
-      this.authService.authLogin(email, password).subscribe({
+      this.authService.login(email, password, recaptchaReactive).subscribe({
         next: () => this.router.navigate(['/']),
         error: (err) => {
-          console.log("ERROR:", err);
           const msg = err?.error?.error || this.tr.translate('auth.loginFailed');
-          this.snackBar.open(msg, this.tr.translate('common.close'), {
-            duration: 5000,
-            panelClass: 'custom-snackbar',
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-          });
+
+          this.showSnackbar(msg, 'error');
         }
       })
     } else {
-      this.authService.authRegister(username, email, password).subscribe({
+      this.authService.register(username, email, password, recaptchaReactive).subscribe({
         next: () => {
           this.dialog.open(EmailVerificationDialogComponent, {
             data: { email }
           });
           this.toggleMode();
-          this.form.reset();
         },
         error: (err) => {
-          console.log("ERROR:", err);
           const msg = err?.error?.error || this.tr.translate('auth.registrationFailed');
 
-          this.snackBar.openFromComponent(SnackbarAlertComponent, {
-            data: { message: msg, icon: 'error' },
-            duration: 4000,
-            panelClass: ['custom-snackbar-error'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
+          this.showSnackbar(msg, 'error');
         }
       })
     }
+  }
+
+  showSnackbar(msg: string, type: 'success' | 'error') {
+    this.snackBar.openFromComponent(SnackbarAlertComponent, {
+      data: { message: msg, icon: type },
+      panelClass: [`custom-snackbar-${type}`],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: 4000,
+    });
+  }
+
+  executeRecaptcha(token: string | null): void {
+    console.log('TOKEN:', token);
   }
 
 }
