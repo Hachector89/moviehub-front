@@ -31,8 +31,8 @@ export class AuthService {
     );
   }
 
-  verifyEmailToken(token: string): Observable<any> {
-    return this.http.get(`${this.authUrl}/verify`, { params: { token } });
+  verifyEmailToken(token: string): Observable<void> {
+    return this.http.get<void>(`${this.authUrl}/verify`, { params: { token } });
   }
 
   logout() {

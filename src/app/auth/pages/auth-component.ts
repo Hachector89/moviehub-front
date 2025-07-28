@@ -17,11 +17,10 @@ import { Router, RouterModule } from '@angular/router';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { TitleCasePipe } from '@angular/common'
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../services/auth-service';
 import { EmailVerificationDialogComponent } from './email-verification-dialog/email-verification-dialog-component'
-import { SnackbarAlertComponent } from '../../shared/snackbar-alert/snackbar-alert-component';
+import { NotificationBarService } from '../../shared/services/notification-bar-service';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha-2';
 
 @Component({
@@ -46,6 +45,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha-2';
 export class AuthComponent implements OnInit {
   mode = signal<'login' | 'register'>('login');
   form!: FormGroup;
+  token: string | null = '';
 
   constructor(
     private fb: FormBuilder,
@@ -53,7 +53,7 @@ export class AuthComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar,
+    private notifService: NotificationBarService
   ) { }
 
   ngOnInit(): void {
@@ -65,17 +65,21 @@ export class AuthComponent implements OnInit {
   }
 
   buildForm(): FormGroup {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const usernameRegex = /^[a-zA-Z0-9]+$/;
+
     if (this.isLogin()) {
       return this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
+        email: ['', [Validators.required, Validators.email,Validators.pattern(emailRegex)]],
+        password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(passwordRegex)]],
         recaptchaReactive: ['', Validators.required]
       });
     } else {
       return this.fb.group({
-        username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
+        username: ['', [Validators.required, Validators.pattern(usernameRegex)]],
+        email: ['', [Validators.required, Validators.email, Validators.pattern(emailRegex)]],
+        password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(passwordRegex)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
         recaptchaReactive: ['', Validators.required]
       }, { validators: this.passwordsMatchValidator });
@@ -110,7 +114,7 @@ export class AuthComponent implements OnInit {
         error: (err) => {
           const msg = err?.error?.error || this.tr.translate('auth.loginFailed');
 
-          this.showSnackbar(msg, 'error');
+          this.notifService.showSnackbar(msg, 'error');
         }
       })
     } else {
@@ -124,24 +128,10 @@ export class AuthComponent implements OnInit {
         error: (err) => {
           const msg = err?.error?.error || this.tr.translate('auth.registrationFailed');
 
-          this.showSnackbar(msg, 'error');
+          this.notifService.showSnackbar(msg, 'error');
         }
       })
     }
-  }
-
-  showSnackbar(msg: string, type: 'success' | 'error') {
-    this.snackBar.openFromComponent(SnackbarAlertComponent, {
-      data: { message: msg, icon: type },
-      panelClass: [`custom-snackbar-${type}`],
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 4000,
-    });
-  }
-
-  executeRecaptcha(token: string | null): void {
-    console.log('TOKEN:', token);
   }
 
 }

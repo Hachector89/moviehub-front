@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackbarAlertComponent } from '../../../shared/snackbar-alert/snackbar-alert-component';
+import { NotificationBarService } from '../../../shared/services/notification-bar-service';
+import { TranslocoService } from '@jsverse/transloco';
+
 
 @Component({
   selector: 'app-verify-email-component',
@@ -15,8 +16,9 @@ export class VerifyEmailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
     private router: Router,
+    private notifService: NotificationBarService,
+    private tr: TranslocoService,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +29,8 @@ export class VerifyEmailComponent implements OnInit {
   getToken(): string {
     const token = this.activatedRoute.snapshot.queryParamMap.get('token');
     if (!token) {
-      this.showSnackbar('Invalid verification link', 'error');
+      const msg = this.tr.translate('auth.verificationInvalid');
+      this.notifService.showSnackbar(msg, 'error');
       this.router.navigate(['/auth']);
       return '';
     }
@@ -37,24 +40,16 @@ export class VerifyEmailComponent implements OnInit {
   private verifyToken(token: string): void {
     this.authService.verifyEmailToken(token).subscribe({
       next: () => {
-        this.showSnackbar('Email verified successfully! You can now log in.', 'success');
+        const msg = this.tr.translate('auth.verificationSuccess');
+        this.notifService.showSnackbar(msg, 'success');
         this.router.navigate(['/auth']);
       },
       error: (err) => {
-        const msg = err.error?.error || 'Verification failed';
-        this.showSnackbar(msg, 'error');
+        const msg = err.error?.error || this.tr.translate('auth.verificationFailed');;
+        this.notifService.showSnackbar(msg, 'error');
         this.router.navigate(['/auth']);
       }
     });
   }
 
-  showSnackbar(msg: string, type: 'success' | 'error') {
-    this.snackBar.openFromComponent(SnackbarAlertComponent, {
-      data: { message: msg, icon: type },
-      panelClass: [`custom-snackbar-${type}`],
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 4000,
-    });
-  }
 }

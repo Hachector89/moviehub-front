@@ -3,13 +3,14 @@ import { Component, inject } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
+
 
 export interface DialogData {
   email: String;
@@ -23,6 +24,7 @@ export interface DialogData {
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    TranslocoModule
   ],
   templateUrl: './email-verification-dialog-component.html',
   styleUrl: './email-verification-dialog-component.css'

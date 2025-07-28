@@ -5,19 +5,15 @@
       <mat-icon>menu</mat-icon>
     </button>
 
+    <!-- Logo/Name -->
     <span class="text-lg font-semibold tracking-wide">MovieHub</span>
-
-
 
     <!-- Desktop links -->
     <nav class="hidden md:flex gap-6">
-
-
-
-      <a routerLink="/" class="hover:underline">Home</a>
-      <a routerLink="/seen" class="hover:underline">Seen</a>
-      <a routerLink="/to-watch" class="hover:underline">To Watch</a>
-      <a routerLink="/auth" class="hover:underline">Sign In</a>
+      <a routerLink="/" class="hover:underline">{{ 'menu.home' | transloco }}</a>
+      <a routerLink="/seen" class="hover:underline">{{ 'menu.seen' | transloco }}</a>
+      <a routerLink="/to-watch" class="hover:underline">{{ 'menu.toWatch' | transloco }}</a>
+      <a routerLink="/auth" class="hover:underline">{{ 'menu.signin' | transloco }}</a>
 
       <div class="hidden md:block" class="ml-20">
         <app-language-selector-component></app-language-selector-component>

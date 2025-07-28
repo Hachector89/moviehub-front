@@ -3,7 +3,12 @@
     "es": "español",
     "en": "inglés"
   },
-
+  "menu": {
+    "home": "Inicio",
+    "seen": "Vistas",
+    "toWatch": "Pendientes",
+    "signin": "Login"
+  },
   "auth": {
     "signin": "Login",
     "signup": "Registrarse",
@@ -23,10 +28,16 @@
     "haveAccount": "¿Ya tienes una cuenta?",
     "createAccount": "Crear una.",
     "loginFailed": "Inicio de sesión incorrecto.",
-    "registrationFailed": "Error al registrarse."
+    "registrationFailed": "Error al registrarse.",
+    "emailCheck": "Comprueba tu email",
+    "verificationSent": "Se ha enviado un enlace de verificación a",
+    "verificationBefore": "Por favor, verifique su cuenta antes de iniciar sesión.",
+    "verificationInvalid": "El enlace de verificación no es válido. Inténtalo más tarde o contáctanos.",
+    "verificationFailed": "La verificación de la cuenta ha fallado. Inténtalo más tarde o contáctanos.",
+    "verificationSuccess": "¡La cuenta se ha verificado satisfactoriamente! Ya puedes iniciar sesión."
   },
-
   "common": {
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "ok": "OK"
   }
 }

@@ -3,7 +3,12 @@
     "es": "spanish",
     "en": "english"
   },
-
+  "menu": {
+    "home": "Home",
+    "seen": "Seen",
+    "toWatch": "To Watch",
+    "signin": "Sign In"
+  },
   "auth": {
     "signin": "Sign In",
     "signup": "Sign Up",
@@ -23,10 +28,16 @@
     "haveAccount": "Already have an account?",
     "createAccount": "Create one",
     "loginFailed": "Login failed.",
-    "registrationFailed": "Registration failed."
+    "registrationFailed": "Registration failed.",
+    "emailCheck": "Check your email",
+    "verificationSent": "We've sent a verification link to",
+    "verificationBefore": "Please verify your account before logging in.",
+    "verificationInvalid": "Invalid verification link. Try again later or contact us.",
+    "verificationFailed": "Verification failed. Try again later or contact us.",
+    "verificationSuccess": "Account verified successfully! You can now log in."
   },
-
   "common": {
-    "close": "Close"
+    "close": "Close",
+    "ok": "OK"
   }
 }

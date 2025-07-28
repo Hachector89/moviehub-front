@@ -1,10 +1,12 @@
-<h2 mat-dialog-title>Check your email</h2>
-<mat-dialog-content>
-  <p>
-    We’ve sent a verification link to <strong>{{ data.email }}</strong>.
-    Please verify your account before logging in.
-  </p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close color="primary">OK</button>
-</mat-dialog-actions>
+<ng-container *transloco="let t">
+  <h2 mat-dialog-title>{{ 'auth.emailCheck' | transloco }}</h2>
+  <mat-dialog-content>
+    <p>
+      {{ 'auth.verificationSent' | transloco }} <strong>{{ data.email }}</strong>.
+      {{ 'auth.verificationBefore' | transloco }}
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close color="primary">{{ 'common.ok' | transloco }}</button>
+  </mat-dialog-actions>
+</ng-container>
