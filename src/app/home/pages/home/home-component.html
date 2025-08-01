@@ -1,3 +1,12 @@
 <div class="text-white text-center text-xl">
   Bienvenido a MovieHub 🎬
 </div>
+
+
+<p>Veamos si funciona!!</p>
+
+@if (popularMovies()?.results) {
+  @for (movie of popularMovies()!.results; track movie.id) {
+    <p>Movie id: {{ movie.id }} - Título: {{ movie.title }}</p>
+  }
+}

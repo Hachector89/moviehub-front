@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
@@ -32,7 +32,9 @@ export class AuthService {
   }
 
   verifyEmailToken(token: string): Observable<void> {
-    return this.http.get<void>(`${this.authUrl}/verify`, { params: { token } });
+    const params = new HttpParams()
+      .set('token', token);
+    return this.http.get<void>(`${this.authUrl}/verify`, { params });
   }
 
   logout() {

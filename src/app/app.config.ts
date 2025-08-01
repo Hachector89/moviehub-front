@@ -2,11 +2,10 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessC
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
-import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha-2';
+import { authInterceptor } from './shared/services/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,11 +13,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     provideZonelessChangeDetection(),
     provideRouter(routes),
-    provideClientHydration(withEventReplay()),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideTransloco({
       config: {
         availableLangs: ['en', 'es'],
         defaultLang: 'en',
+        fallbackLang: 'es',
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
       },
