@@ -8,5 +8,6 @@
 @if (popularMovies()?.results) {
   @for (movie of popularMovies()!.results; track movie.id) {
     <p>Movie id: {{ movie.id }} - Título: {{ movie.title }}</p>
+    <p><img src="{{fullPosterPath}}{{movie.poster_path}}" alt=""></p>
   }
 }
