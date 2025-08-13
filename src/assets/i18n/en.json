@@ -39,5 +39,22 @@
   "common": {
     "close": "Close",
     "ok": "OK"
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "conditionsOfUse": "Conditions of Use",
+    "aboutUs": "About Us",
+    "help": "Help",
+    "faq": "FAQ",
+    "support": "Support",
+    "feedback": "Feedback",
+    "careers": "Careers",
+    "blog": "Blog",
+    "community": "Community",
+    "newsletter": "Newsletter",
+    "socialMedia": "Follow us on social media",
+    "rightsReserved": "All rights reserved."
   }
 }

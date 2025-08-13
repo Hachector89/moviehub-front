@@ -39,5 +39,20 @@
   "common": {
     "close": "Cerrar",
     "ok": "OK"
+  },
+  "footer": {
+    "contactUs": "Contáctanos",
+    "privacyPolicy": "Política de Privacidad",
+    "conditionsOfUse": "Condiciones de Uso",
+    "aboutUs": "Sobre Nosotros",
+    "help": "Ayuda",
+    "faq": "Preguntas frecuentes",
+    "support": "Soporte",
+    "careers": "Empleo",
+    "blog": "Blog",
+    "community": "Comunidad",
+    "newsletter": "Newsletter",
+    "socialMedia": "Síguenos en las redes sociales",
+    "rightsReserved": "Todos los derechos reservados."
   }
 }

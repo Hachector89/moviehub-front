@@ -22,11 +22,11 @@ export class VerifyEmailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const token = this.getToken();
+    const token = this.getEmailToken();
     if (token !== '') this.verifyToken(token);
   }
 
-  getToken(): string {
+  getEmailToken(): string {
     const token = this.activatedRoute.snapshot.queryParamMap.get('token');
     if (!token) {
       const msg = this.tr.translate('auth.verificationInvalid');

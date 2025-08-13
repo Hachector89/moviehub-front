@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { SideMenuComponent } from '../../../shared/side-menu/side-menu-component'
-import { NavbarMenuComponent } from '../../../shared/navbar-menu/navbar-menu-component';
+import { SideMenuComponent } from '../../../shared/components/side-menu/side-menu-component'
+import { NavbarMenuComponent } from '../../../shared/components/navbar-menu/navbar-menu-component';
 
 @Component({
   selector: 'app-layout-component',

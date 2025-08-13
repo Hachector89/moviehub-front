@@ -4,7 +4,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { TitleCasePipe } from '@angular/common'
 
 
-import { LanguageService } from '../services/language-service'
+import { LanguageService } from '../../services/language-service'
 
 
 @Component({

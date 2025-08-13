@@ -1,4 +1,4 @@
-import { MovieDetail } from './detail-response-model'
+import { MovieDetail } from '../../shared/models/detail-response-model'
 
 export interface PopularResponse {
   page: number;

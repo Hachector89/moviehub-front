@@ -1,18 +1,20 @@
-<footer class="footer-container bg-gray-900 text-gray-200 py-8 mt-10">
-  <div class="footer-content flex flex-col md:flex-row items-center justify-between px-6 max-w-6xl mx-auto">
-    <div class="footer-logo flex items-center mb-4 md:mb-0">
-      <!-- Replace with your logo image -->
-      <!-- img src="assets/logo.png" alt="MovieHub Logo" class="logo-img w-12 h-12 mr-3 rounded shadow" / -->
-      <span class="footer-title text-2xl font-bold tracking-wide">MovieHub</span>
+<ng-container *transloco="let t">
+  <footer class="footer-container bg-gray-900 text-gray-200 py-8 mt-10">
+    <div class="footer-content flex flex-col md:flex-row items-center justify-between px-6 max-w-6xl mx-auto">
+      <div class="footer-logo flex items-center mb-4 md:mb-0">
+        <!-- logo image -->
+        <!-- img src="assets/logo.png" alt="MovieHub Logo" class="logo-img w-12 h-12 mr-3 rounded shadow" / -->
+        <span class="footer-title text-2xl font-bold tracking-wide">MovieHub</span>
+      </div>
+      <nav class="footer-links flex flex-wrap gap-4">
+        <a href="/" class="footer-link hover:text-white transition">{{ 'footer.contactUs' | transloco }}</a>
+        <a href="/" class="footer-link hover:text-white transition">{{ 'footer.conditionsOfUse' | transloco }}</a>
+        <a href="/" class="footer-link hover:text-white transition">{{ 'footer.privacyPolicy' | transloco }}</a>
+        <a href="/" class="footer-link hover:text-white transition">{{ 'footer.aboutUs' | transloco }}</a>
+      </nav>
     </div>
-    <nav class="footer-links flex flex-wrap gap-4">
-      <a href="/" class="footer-link hover:text-white transition">Contact Us</a>
-      <a href="/" class="footer-link hover:text-white transition">Conditions of Use</a>
-      <a href="/" class="footer-link hover:text-white transition">Privacy Policy</a>
-      <a href="/" class="footer-link hover:text-white transition">About</a>
-    </nav>
-  </div>
-  <div class="footer-bottom border-t border-gray-700 mt-6 pt-4 text-center text-sm">
-    <span>&copy; {{ currentYear }} MovieHub. All rights reserved.</span>
-  </div>
-</footer>
+    <div class="footer-bottom border-t border-gray-700 mt-6 pt-4 text-center text-sm">
+      <span>&copy; {{ currentYear }} MovieHub. {{ 'footer.rightsReserved' | transloco }}</span>
+    </div>
+  </footer>
+</ng-container>

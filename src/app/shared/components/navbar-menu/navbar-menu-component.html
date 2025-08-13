@@ -5,15 +5,14 @@
       <!-- Desktop Logo/Name -->
       <span class="text-lg font-semibold tracking-wide hidden md:inline-block">MovieHub</span>
 
-      <!-- Mobile burger menu left -->
+      <!-- Mobile burger menu -->
       <button mat-icon-button class="visible md:invisible" (click)="menuToggle.emit()" aria-label="Open menu">
         <mat-icon>menu</mat-icon>
       </button>
 
-      <!-- Mobile Logo/Name right -->
+      <!-- Mobile Logo/Name -->
       <span class="text-lg font-semibold tracking-wide md:hidden ml-auto">MovieHub</span>
 
-      <!-- Desktop links and language selector right -->
       <nav class="hidden md:flex gap-6 ml-auto items-center">
         <a routerLink="/" class="hover:underline">{{ 'menu.home' | transloco }}</a>
         <a routerLink="/" class="hover:underline">{{ 'menu.seen' | transloco }}</a>

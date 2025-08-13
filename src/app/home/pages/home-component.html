@@ -1,0 +1,16 @@
+<div class="grid grid-cols-6 gap-6 max-md:grid-cols-2 max-md:gap-4 max-md:px-2 mt-6">
+  <div class="max-md:hidden"></div>
+
+  @if (popularMovies()) {
+  <div class="col-span-4 grid grid-cols-4 gap-8 max-md:col-span-2 max-md:grid-cols-2">
+    @for (movie of popularMovies()!.results; track movie.id) {
+    <app-home-movie-card-component [movieDetail]="movie" [movie]="movie"></app-home-movie-card-component>
+    }
+  </div>
+  }
+
+  <div class="max-md:hidden"></div>
+</div>
+
+
+<app-footer-component></app-footer-component>
