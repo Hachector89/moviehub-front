@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MovieDetail } from '../../models/detail-response-model'
+import { MovieDetail } from '../../models/movie-detail-response-model'
 import { TmdbConfigStore } from '../../../TMDB/stores/tmdb-config-store';
 
 @Component({
