@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoModule } from '@jsverse/transloco';
 import { TitleCasePipe } from '@angular/common'
-
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { LanguageService } from '../../services/language-service'
-
 
 @Component({
   selector: 'app-language-selector-component',
@@ -17,29 +16,23 @@ import { LanguageService } from '../../services/language-service'
   templateUrl: './language-selector-component.html',
   styleUrl: './language-selector-component.css'
 })
-export class LanguageSelectorComponent implements OnInit {
+export class LanguageSelectorComponent {
 
-  activeLang!: string;
   langs: string[] = [];
-
+  activeLang!: () => string;
 
   constructor(
     private languageService: LanguageService
-  ) {}
-
-
-  ngOnInit(): void {
-    this.initializeLangs();
-  }
-
-  initializeLangs(): void {
-    this.activeLang = this.languageService.activeLang;
+  ) {
     this.langs = this.languageService.availableLangs;
+
+    this.activeLang = toSignal(this.languageService.activeLang$, {
+      initialValue: this.languageService.activeLang
+    });
   }
 
   changeLang(lang: string) {
     this.languageService.setLang(lang);
-    this.activeLang = lang;
   }
 
 }

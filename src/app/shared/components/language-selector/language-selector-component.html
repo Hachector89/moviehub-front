@@ -1,5 +1,5 @@
 <ng-container *transloco="let t">
-  <mat-select [value]="activeLang" (selectionChange)="changeLang($event.value)" class="min-w-32">
+  <mat-select [value]="activeLang()" (selectionChange)="changeLang($event.value)" class="min-w-32">
     @for (lang of langs; track lang) {
     <mat-option [value]="lang" class="min-w-32">
       {{ 'lang.' + lang | transloco | titlecase }}

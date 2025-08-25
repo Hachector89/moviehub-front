@@ -10,6 +10,8 @@ import { LoginResponse } from '../models/login-response-model'
 })
 export class AuthService {
 
+  private readonly TOKEN_STORAGE_KEY = 'authtoken';
+
   private readonly baseUrl = environment.apiBaseUrl;
   private readonly authUrl = this.baseUrl + '/auth';
 
@@ -25,7 +27,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(`${this.authUrl}/login`, { email, password, token }).pipe(
       tap((res) => {
         if (res?.token) {
-          localStorage.setItem('token', res.token);
+          localStorage.setItem(this.TOKEN_STORAGE_KEY, res.token);
         }
       })
     );
@@ -33,16 +35,16 @@ export class AuthService {
 
   verifyEmailToken(token: string): Observable<void> {
     const params = new HttpParams()
-      .set('token', token);
+      .set(this.TOKEN_STORAGE_KEY, token);
     return this.http.get<void>(`${this.authUrl}/verify`, { params });
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.TOKEN_STORAGE_KEY);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem(this.TOKEN_STORAGE_KEY);
   }
 
   isLoggedIn(): boolean {

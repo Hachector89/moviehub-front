@@ -7,19 +7,34 @@ import { map, Observable } from 'rxjs';
 })
 export class LanguageService {
 
+  private readonly LANG_STORAGE_KEY = 'activeLang';
+
   private readonly langMap: Record<string, string> = {
     en: 'en-US',
     es: 'es-ES',
   };
 
   activeLangCountryCode$!: Observable<string>;
+  activeLang$!: Observable<string>;
 
   constructor(
     private tr: TranslocoService
   ) {
+
+    const storedLang = localStorage.getItem(this.LANG_STORAGE_KEY);
+    if (storedLang && this.availableLangs.includes(storedLang)) {
+      this.setLang(storedLang);
+    }
+
+    this.activeLang$ = this.tr.langChanges$;
+
     this.activeLangCountryCode$ = this.tr.langChanges$.pipe(
       map(lang => this.langMap[lang] ?? 'en-US')
     );
+
+    this.tr.langChanges$.subscribe(lang => {
+      localStorage.setItem(this.LANG_STORAGE_KEY, lang);
+    });
   }
 
   setLang(lang: string) {

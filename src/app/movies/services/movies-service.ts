@@ -1,6 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 
 import { environment } from '../../../../src/environments/environment';
 import { PopularResponse } from '../models/popular-response-model';
@@ -16,10 +18,24 @@ export class MoviesService {
   private readonly baseUrl = environment.apiBaseUrl;
   private readonly moviesUrl = this.baseUrl + '/movies';
 
-  constructor(
-    private http: HttpClient,
-    private languageService: LanguageService
-  ) { }
+  private http = inject(HttpClient);
+  private languageService = inject(LanguageService);
+
+  popularMovies = toSignal(
+    this.languageService.activeLangCountryCode$.pipe(
+      switchMap(lang => this.getPopularMoviesWithFallback(lang)) // se relanza en cada cambio de idioma
+    ),
+    { initialValue: null }
+  );
+
+  detailMovie(id: number) {
+    return toSignal(
+      this.languageService.activeLangCountryCode$.pipe(
+        switchMap(lang => this.getMovieDetails(id, lang))
+      ),
+      { initialValue: null }
+    );
+  }
 
   getPopularMovies(language: string = 'en-US', page: number = 1): Observable<PopularResponse> {
     const params = new HttpParams()
